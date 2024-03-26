@@ -1,9 +1,30 @@
 import read = require('readline-sync');
 import { colors } from './src/util/colors';
+import {Conta } from './src/model/Conta';
 
 export function main() {
-  
+
+console.log('\nCriar o Objeto da Classe Conta');
+
 let opcao: number;
+
+let c1: Conta = new Conta(1, 123, 1, 'Miguel', 112000);
+
+c1.visualizar();
+
+console.log('\nAlterar o Saldo para R$ 320000.00');
+c1.set_saldo(320000);
+
+console.log(`\nNovo Saldo da Conta: ${c1.get_saldo()}`);
+c1.visualizar();
+
+console.log(`\nSacar R$ 900.00 da conta: ${c1.sacar(900)}`);
+c1.visualizar();
+
+console.log('\nDepositar R$ 3000.00 na Conta: ');
+c1.depositar(3000);
+c1.visualizar();
+
 
   while (true) {
     
@@ -34,8 +55,8 @@ let opcao: number;
     opcao = read.questionInt('');
 
     if (opcao == 9) {
-      console.log(colors.fg.yellow,
-        '\nBanco do Brazil - O seu futuro começa aqui!');
+      console.log(colors.fg.cyanstrong,
+        '\nBlueSkin Bank - O seu futuro começa aqui!');
       sobre()
       console.log(colors.reset, '');
       process.exit(0)
