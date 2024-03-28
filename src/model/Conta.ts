@@ -14,47 +14,53 @@ export class Conta {
 		this._saldo = _saldo;
 	}
 	
-	public get_numero(): number {
+
+	public get numero(): number {
 		return this._numero;
 	}
 
-	public get_agencia(): number {
+
+	public get agencia(): number {
 		return this._agencia;
 	}
 
-	public get_tipo(): number {
+  
+	public get tipo(): number {
 		return this._tipo;
 	}
 
-	public get_titular(): string {
+ 
+	public get titular(): string {
 		return this._titular;
 	}
 
-
-	public get_saldo(): number {
+   
+	public get saldo(): number {
 		return this._saldo;
 	}
 
-	public set_numero(value: number) {
+  
+	public set numero(value: number) {
 		this._numero = value;
 	}
 
-
-	public set_agencia(value: number) {
+  
+	public set agencia(value: number) {
 		this._agencia = value;
 	}
 
-	public set_tipo(value: number) {
+
+	public set tipo(value: number) {
 		this._tipo = value;
 	}
 
-
-	public set_titular(value: string) {
+  
+	public set titular(value: string) {
 		this._titular = value;
 	}
 
-
-	public set_saldo(value: number) {
+  
+	public set saldo(value: number) {
 		this._saldo = value;
 	}
 
@@ -62,16 +68,16 @@ export class Conta {
 	public sacar(valor: number): boolean{
 
     if(this._saldo >= valor){
-      this.set_saldo(this._saldo - valor)
+      this._saldo = (this._saldo - valor);
       return true;
     }
 
-    console.log('Saldo é insuficiente');
+    console.log('\nSaldo é insuficiente');
     return false;
   }
   
   public depositar(valor: number): void{
-    this.set_saldo(this._saldo + valor);
+    this._saldo = (this._saldo + valor);
 
   }
 
@@ -94,8 +100,8 @@ export class Conta {
     console.log('*************************************************');
     console.log(`Numero da conta: ${this._numero}`);
     console.log(`Numero da agencia: ${this._agencia}`);
-    console.log(`Tipo da conta: ${this._tipo}`);
-    console.log(`Tipo da conta: ${this._titular}`);
+    console.log(`Tipo da conta: ${tipo}`);
+    console.log(`Titular da conta: ${this._titular}`);
     console.log(`Saldo da conta: ${this._saldo.toFixed(2)}`);
 	}
     

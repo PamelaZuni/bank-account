@@ -1,6 +1,9 @@
+//conta corrente foi construida como uma heranca da conta
+
 import read = require('readline-sync');
 import { colors } from './src/util/colors';
-import {Conta } from './src/model/Conta';
+import { Conta } from './src/model/Conta';
+import { ContaCorrente } from './src/model/ContaCorrente';
 
 export function main() {
 
@@ -8,14 +11,14 @@ console.log('\nCriar o Objeto da Classe Conta');
 
 let opcao: number;
 
-let c1: Conta = new Conta(1, 123, 1, 'Miguel', 112000);
+let c1: Conta = new Conta(1, 123, 1, 'Miguel Juarez', 112000);
 
 c1.visualizar();
 
 console.log('\nAlterar o Saldo para R$ 320000.00');
-c1.set_saldo(320000);
+c1.saldo = 320000;
 
-console.log(`\nNovo Saldo da Conta: ${c1.get_saldo()}`);
+console.log(`\nNovo Saldo da Conta: ${c1.saldo}`);
 c1.visualizar();
 
 console.log(`\nSacar R$ 900.00 da conta: ${c1.sacar(900)}`);
@@ -25,6 +28,17 @@ console.log('\nDepositar R$ 3000.00 na Conta: ');
 c1.depositar(3000);
 c1.visualizar();
 
+const cc1: ContaCorrente = new ContaCorrente(2, 454, 1, 'Jaime Sand', 99000, 1000); //create a new object using const
+cc1.visualizar(); 
+
+cc1.sacar(3000);
+
+cc1.visualizar();
+
+cc1.depositar(2000);
+
+cc1.visualizar();
+
 
   while (true) {
     
@@ -32,7 +46,7 @@ c1.visualizar();
     console.log(colors.bg.black, colors.fg.cyanstrong,
                '*********************************************************');
     console.log('                                                        ');
-    console.log('                     BLUESKIN BANK                 ');
+    console.log('                     BLUESKIN BANK                      ');
     console.log('                                                        ');
     console.log('********************************************************');
     console.log('                                                        ');
