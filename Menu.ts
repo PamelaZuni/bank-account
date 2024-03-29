@@ -4,6 +4,7 @@ import read = require('readline-sync');
 import { colors } from './src/util/colors';
 import { Conta } from './src/model/Conta';
 import { ContaCorrente } from './src/model/ContaCorrente';
+import { ContaPoupanca } from './src/model/ContaPoupanca';
 
 export function main() {
 
@@ -30,15 +31,17 @@ c1.visualizar();
 
 const cc1: ContaCorrente = new ContaCorrente(2, 454, 1, 'Jaime Sand', 99000, 1000); //create a new object using const
 cc1.visualizar(); 
-
 cc1.sacar(3000);
-
 cc1.visualizar();
-
 cc1.depositar(2000);
-
 cc1.visualizar();
 
+const ccc1: ContaPoupanca = new ContaPoupanca(6, 453, 1, 'Nike Jones', 5000, 10);
+ccc1.visualizar();
+ccc1.sacar(500);
+ccc1.visualizar();
+ccc1.depositar(7000);
+ccc1.visualizar();
 
   while (true) {
     
