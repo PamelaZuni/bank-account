@@ -1,15 +1,28 @@
 //conta corrente foi construida como uma heranca da conta
 
-import read = require('readline-sync');
+import readlinesync = require('readline-sync');
 import { colors } from './src/util/colors';
 import { Conta } from './src/model/Conta';
 import { ContaCorrente } from './src/model/ContaCorrente';
 import { ContaPoupanca } from './src/model/ContaPoupanca';
+import { ContaController } from './src/controller/ContaController';
 
 export function main() {
 
 
-let opcao: number;
+let opcao: number, agencia, tipo, saldo, limite, aniversario: number;
+//let titular: string;
+//const tipoContas = ['Conta Corrente', 'Conta Poupanca'];
+
+const contas: ContaController = new ContaController();
+
+const contaCorrente: ContaCorrente = new ContaCorrente(2, 454, 1, 'Jaime Sand', 99000, 1000);
+contas.cadastrar(contaCorrente);
+// let cc1: ContaCorrente = new ContaCorrente(2, 454, 1, 'Jaime Sand', 99000, 1000);
+// contas.cadastrar(cc1);
+
+const contaPoupanca: ContaPoupanca = new ContaPoupanca(6, 453, 1, 'Nike Jones', 5000, 10);
+contas.cadastrar(contaPoupanca);
 
 // console.log('\nCriar o Objeto da Classe Conta');
 
@@ -70,7 +83,7 @@ ccc1.visualizar();
 
     console.log(colors.fg.whitestrong,
       'Entre a opção desejada: ', colors.reset);
-    opcao = read.questionInt('');
+    opcao = readlinesync.questionInt('');
 
     if (opcao == 9) {
       console.log(colors.fg.cyanstrong,
@@ -84,12 +97,50 @@ ccc1.visualizar();
       case 1:
         console.log(colors.fg.whitestrong,
           '\n\nCriar Conta\n\n', colors.reset);
+          /*console.log('Digite o Número da Agência: ');
+          agencia = readlinesync.questionInt('');          
+          
+          console.log('Digite o Nome do Titular: ');
+          agencia = readlinesync.questionInt('');          
+          
+          console.log('Informe o tipo da Conta: ');
+          tipo = readlinesync.keyInSelect(tipoContas, '', {cancel: false}) + 1;   
+          
+          console.log('Digite o Saldo da Conta: ');
+          saldo = readlinesync.questionFloat('');
+         */
+          keyPress()
+          break;
+          /*switch(tipo){
+            case 1: 
+             console.log('Digit o Limite da Conta: ');
+             limite = readlinesync.questionFloat('')
+             contas.cadastrar(
+              new ContaCorrente(contas.gerarNumero(), agencia, tipo, titular, saldo, limite)
+             )
+            break;
+            case 2:
+              console.log('Digite o dia do aniversario da Conta: ')
+              aniversario = readlinesync.question('')
+              contas.cadastrar(
+
+              )
+              limite = readlinesync.questionInt('')
+              break;
+
+          }
+          
+          
+
+
         
           keyPress()
         break;
+        */
       case 2:
         console.log(colors.fg.whitestrong,
           '\n\nListar todas as Contas\n\n', colors.reset);
+          contas.listarTodas();
         
         keyPress()
         break;
@@ -154,6 +205,6 @@ ccc1.visualizar();
   function keyPress(): void {
     console.log(colors.reset, '');
     console.log('\nPressione enter para continuar...');
-    read.prompt();
+    readlinesync.prompt();
   }
   main();
