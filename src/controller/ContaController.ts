@@ -8,12 +8,13 @@ export class ContaController implements ContaRepository{
   public numero: number = 0;
 
   procurarPorNumero(numero: number): void {
-    /*let buscaConta = this.buscarNoArray(numero);
+    let buscaConta = this.buscarNoArray(numero);
 
-    if(buscaConta !== null)
+
+    if(buscaConta !== null) {
        buscaConta.visualizar()
-    else
-   */   console.log('Conta não foi Encontrada!')
+    }else
+     console.log('Conta não foi Encontrada!')
   }
 
   listarTodas(): void {
@@ -23,22 +24,27 @@ export class ContaController implements ContaRepository{
   }
   cadastrar(conta: Conta): void {
     this.listaContas.push(conta);
-    console.log('A Conta foi adicionara!');
+    console.log(`A Conta número: ${conta.numero} foi criada com sucesso!`);
   }
 
   atualizar(conta: Conta): void {
-    throw new Error("Method not implemented.");
-  }
-  deletar(numero: number): void {
-  }
-    /*let buscaConta = this.buscarNoArray(numero);
+    let buscaConta = this.buscarNoArray(conta.numero);
 
     if(buscaConta !== null){
-      this.listaContas.splice(this.listaContas.indexOf(buscaConta, 1));
-      console.log(`A Conta n[umero ${numero} foi Excluída com êxito!`)
-   }else
+      this.listaContas[this.listaContas.indexOf(buscaConta)] = conta;
+      console.log(`A conta número ${conta.numero} foi atualizada com êxito!`)
+    }else
+    console.log('Conta não foi Encontrada!');
+  }
+  deletar(numero: number): void{
+    let buscaConta = this.buscarNoArray(this.numero);
+
+    if(buscaConta !== null){
+       this.listaContas.splice(this.listaContas.indexOf(buscaConta, 1));
+      console.log(`A Conta número foi Excluída com êxito!`)
+    }else
       console.log('Conta não foi Encontrada!')
-  }*/
+  }
   sacar(numero: number, valor: number): void {
     throw new Error("Method not implemented.");
   }
