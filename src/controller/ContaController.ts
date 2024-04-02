@@ -3,13 +3,21 @@ import { ContaRepository } from "../repository/ContaRepository";
 
 export class ContaController implements ContaRepository{
 
+  procurarPorTitular(titular: string) {
+    let listaContasPorTitular = this.listaContas.filter( c =>
+        c.titular.toUpperCase().includes(titular.toUpperCase()))
+
+    for ( let conta of listaContasPorTitular){
+        conta.visualizar();
+    }
+}
+
   private listaContas: Array<Conta> = new Array<Conta>();
 
   public numero: number = 0;
 
   procurarPorNumero(numero: number): void {
     let buscaConta = this.buscarNoArray(numero);
-
 
     if(buscaConta !== null) {
        buscaConta.visualizar()
@@ -46,16 +54,40 @@ export class ContaController implements ContaRepository{
       console.log('Conta não foi Encontrada!')
   }
   sacar(numero: number, valor: number): void {
-    throw new Error("Method not implemented.");
+    let buscaConta = this.buscarNoArray(numero);
+    
+    if(buscaConta !== null) {
+      if(buscaConta.sacar(valor) === true)
+      console.log(`O saque na Conta número ${numero} foi efetuado com êxito!`)
+    }else
+    console.log('Conta não foi Encontrada!');
+
   }
   depositar(numero: number, valor: number): void {
-    throw new Error("Method not implemented.");
+    let buscaConta = this.buscarNoArray(numero);
+    if(buscaConta !== null){
+      buscaConta.depositar(valor)
+      console.log(`O depósito na Conta número ${numero} foi atualizada com êxito!`) //update it
+    }else
+    console.log('Conta não foi Encontrada!');
+
   }
+  
   transferir(numeroOrigem: number, numeroDestino: number, valor: number): void {
-    throw new Error("Method not implemented.");
+    let contaOrigem = this.buscarNoArray(numeroOrigem);
+    let contaDestino = this.buscarNoArray(numeroDestino);
+
+    if(contaOrigem !== null && contaDestino !==null){
+      if(contaOrigem.sacar(valor) === true){
+        contaDestino.depositar(valor)
+        console.log(`A Transferência da conta ${numeroOrigem} para a conta ${numeroDestino}foi Efetuada com êxito!`)
+      }
+    }else 
+      console.log(`\nConta de Origem e/ou a Conta de Destino não foram encontradas`);
+
   }
 
-  //Métodos Auxiliares
+
 
   public gerarNumero(): number{
     return ++ this.numero
@@ -70,5 +102,4 @@ export class ContaController implements ContaRepository{
       return null;
 
   }
-
 }

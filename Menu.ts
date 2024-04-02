@@ -10,34 +10,19 @@ import { ContaController } from './src/controller/ContaController';
 export function main() {
 
 
-let opcao, numero, agencia, tipo, saldo, limite, aniversario: number;
+let opcao, numero, agencia, tipo, saldo, limite, aniversario, valor, numeroDestino: number;
 let titular: string;
 const tipoContas = ['Conta Corrente', 'Conta Poupanca'];
-
 
 const contas: ContaController = new ContaController();
 
 const contaCorrente: ContaCorrente = new ContaCorrente(contas.gerarNumero(), 454, 1, 'Jaime Sand', 99000, 1000);
 contas.cadastrar(contaCorrente);
 
-
 const contaPoupanca: ContaPoupanca = new ContaPoupanca(contas.gerarNumero(), 453, 1, 'Nike Jones', 5000, 10);
 contas.cadastrar(contaPoupanca);
 
 
-const cc1: ContaCorrente = new ContaCorrente(2, 454, 1, 'Jaime Sand', 99000, 1000); //create a new object using const
-cc1.visualizar(); 
-cc1.sacar(3000);
-cc1.visualizar();
-cc1.depositar(2000);
-cc1.visualizar();
-
-const ccc1: ContaPoupanca = new ContaPoupanca(6, 453, 1, 'Nike Jones', 5000, 10);
-ccc1.visualizar();
-ccc1.sacar(500);
-ccc1.visualizar();
-ccc1.depositar(7000);
-ccc1.visualizar();
 
   while (true) {
     
@@ -57,8 +42,8 @@ ccc1.visualizar();
     console.log('                 6 - Sacar                              ');
     console.log('                 7 - Depositar                          ');
     console.log('                 8 - Transferir valores entre Contas    ');
-    console.log('                 9 - Sair                               ');
-    console.log('                                                        ');
+    console.log('                 9 - Buscar Conta por Titular            ');
+    console.log('                 0 - Sair                               ');
     console.log('********************************************************');
     console.log('                                                        ',
     colors.reset);
@@ -67,7 +52,7 @@ ccc1.visualizar();
       'Entre a opção desejada: ', colors.reset);
     opcao = readlinesync.questionInt('');
 
-    if (opcao == 9) {
+    if (opcao == 0) {
       console.log(colors.fg.cyanstrong,
         '\nBlueSkin Bank - O seu futuro começa aqui!');
       sobre()
@@ -181,21 +166,60 @@ ccc1.visualizar();
       case 6:
         console.log(colors.fg.whitestrong,
           '\n\nSaque\n\n', colors.reset);
+        console.log('Digite o número da Conta: ');
+        numero = readlinesync.questionInt('');
+
+        console.log('\nDigite o valor do Saque: ');
+        valor = readlinesync.questionFloat('');
+
+        contas.sacar(numero,valor);
 
         keyPress()
         break;
       case 7:
         console.log(colors.fg.whitestrong,
           '\n\nDepósito\n\n', colors.reset);
+        console.log('Digite o número da Conta:')
+        numero = readlinesync.questionInt('')
+
+        console.log('Digite o valor do Depósito: ');
+        valor = readlinesync.questionFloat('');
+
+        contas.depositar(numero, valor);
 
         keyPress()
         break;
       case 8:
         console.log(colors.fg.whitestrong,
-          '\n\nTransferência entre contar\n\n', colors.reset);
+          '\n\nTransferência entre contas\n\n', colors.reset);
+
+          console.log('Digite o número da Conta de Origem: ');
+          numero = readlinesync.questionInt('');
+
+          console.log('Digite o número da Conta do Destino: ');
+          numeroDestino = readlinesync.questionInt('');
+
+          console.log('Digite o valor do Depósito: ');
+          valor = readlinesync.questionFloat('');
+
+          contas.transferir(numero, numeroDestino, valor);
 
         keyPress()
         break;
+
+        case 9:
+          console.log(colors.fg.whitestrong,
+            "\n\nConsultar conta por titular\n\n", colors.reset);
+
+            console.log("Digite o Nome do Titular: ")
+            titular = readlinesync.question("")
+
+            contas.procurarPorTitular(titular);
+
+          keyPress();
+          break;
+    
+
       default:
         console.log(colors.fg.whitestrong,
           '\n\nOpção Inválida\n\n', colors.reset);
@@ -225,4 +249,3 @@ ccc1.visualizar();
   }
   main();
 
-  
